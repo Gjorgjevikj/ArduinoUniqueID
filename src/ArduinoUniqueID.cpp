@@ -5,7 +5,8 @@
 
 ArduinoUniqueID::ArduinoUniqueID()
 {
-#if defined(ARDUINO_ARCH_AVR)
+#if defined(ARDUINO_ARCH_AVR) && !defined(__LGT8F__) 
+
 	for (size_t i = 0; i < UniqueIDsize; i++)
 	{
 		id[i] = boot_signature_byte_get(0x0E + i + (UniqueIDsize == 9 && i > 5 ? 1 : 0));
@@ -190,6 +191,13 @@ ArduinoUniqueID::ArduinoUniqueID()
 	id[7] = SIGROW.SERNUM7;
 	id[8] = SIGROW.SERNUM8;
 	id[9] = SIGROW.SERNUM9;
+
+#elif defined(__LGT8F__)
+	id[0] = GUID0;
+	id[1] = GUID1;
+	id[2] = GUID2;
+	id[3] = GUID3;
+//#define uC_GUID ( (((uint32_t)GUID3)<<24) | (((uint32_t)GUID2)<<16) | (((uint32_t)GUID1)<<8) | ((uint32_t)GUID0) )
 
 #endif
 }

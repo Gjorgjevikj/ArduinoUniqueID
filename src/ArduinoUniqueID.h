@@ -24,13 +24,17 @@
   #include "pico/bootrom.h"
   }
 #elif defined(ARDUINO_ARCH_MEGAAVR)
+#elif defined(__LGT8F__)
+
 #else
 #error "ArduinoUniqueID only works on AVR, SAM, SAMD, STM32, Teensy, RP2040, megaAVR and ESP Architecture"
 #endif
 
 #if defined(ARDUINO_ARCH_AVR)
 
-#if defined(__AVR_ATmega328PB__)
+#if defined(__LGT8F__)
+#define UniqueIDsize 4
+#elif defined(__AVR_ATmega328PB__)
 #define UniqueIDsize 10
 #else
 #define UniqueIDsize 9
@@ -65,6 +69,9 @@
 #elif defined(ARDUINO_ARCH_MEGAAVR)
 #define UniqueIDsize 10
 #define UniqueIDbuffer 10
+#elif defined(__LGT8F__)
+#define UniqueIDsize 4
+#define UniqueIDbuffer 8
 #endif
 
 #define UniqueID8 (_UniqueID.id + UniqueIDbuffer - 8)

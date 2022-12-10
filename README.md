@@ -16,6 +16,7 @@ ArduinoUniqueID supports the [Microcontrollers](MCU.md).
 * Espressif ESP
 * Teensy
 * Raspberry Pi Pico - RP2040
+* LogicGreen LGT8F
 
 # Installation
 
